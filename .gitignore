@@ -1,2 +1,4 @@
 venv/
 .idea
+gothonweb/__pycache__/*
+tests/__pycache__/*

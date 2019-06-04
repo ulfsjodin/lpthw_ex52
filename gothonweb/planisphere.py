@@ -1,4 +1,4 @@
-# A game to be tested. 
+# A planisphere to be tested.
 # In my case it will be Pytest instead of nosetest.
 
 class Room(object):
