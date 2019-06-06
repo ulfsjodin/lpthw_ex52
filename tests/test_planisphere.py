@@ -1,14 +1,14 @@
-#Pytest will be my choice for this exercise.
-
-import pytest
+# Pytest will be my choice for this exercise.
 
 from gothonweb import planisphere
+from gothonweb.planisphere import START, load_room, generic_death, laser_weapon_armory
 
 
 def test_Room():
     room = planisphere.Room('GoldRoom',
     """This room has gold in it you can grab. There is a door to the north.""")
     assert room.name == 'GoldRoom'
+    assert 'This room has gold' in room.description
     assert room.paths == {} 
 
 def test_room_paths():
@@ -32,3 +32,10 @@ def test_map():
     assert start.go('west') == west
     assert start.go('west').go('east') == start
     assert start.go('down').go('up') == start
+
+def test_gothon_game_map():
+    start_room = planisphere.load_room(START)
+    assert start_room.go('dodge') ==  generic_death
+
+    room = start_room.go('tell a joke')
+    assert  room == laser_weapon_armory
