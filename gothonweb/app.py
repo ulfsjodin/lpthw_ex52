@@ -17,8 +17,8 @@ def index():
 def game():
     room_name = session.get("room_name")
     # return "Hollywood"
-    return room_name
-
+    # return room_name
+    return render_template("show_rooms.html", room_name=room_name)
 
 app.debug = True
 app.secret_key = "Höghults grustag"
