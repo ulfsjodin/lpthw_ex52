@@ -1,4 +1,6 @@
-from flask import Flask, session, redirect, url_for, escape, request
+from flask import Flask, session, redirect, url_for, request
+# from flask import escape
+# escape will probably be necessary later on.
 from flask import render_template
 from gothonweb import planisphere
 
@@ -16,12 +18,32 @@ def index():
 @app.route("/game", methods=['GET', 'POST'])
 def game():
     room_name = session.get("room_name")
-    # return "Hollywood"
-    # return room_name
-    return render_template("show_rooms.html", room_name=room_name)
+    ärtan = "Vattenskidor"
+    if request.method == 'GET':
+        if room_name:
+            room = planisphere.load_room(room_name)
+            return render_template('show_rooms.html', room=room, ärtan=ärtan)
+        else:
+            # Is this really neccessary?
+            render_template('you_are_dead.html')
+    else:
+        action = request.form.get('action')
+
+        if room_name and action:
+            room = planisphere.load_room(room_name)
+            next_room = room.go(action)
+
+            if not next_room:
+                session['room_name'] = planisphere.name_room(room)
+            else:
+                session['room_name'] = planisphere.name_room(next_room)
+
+        return redirect(url_for('game'))
+
 
 app.debug = True
 app.secret_key = "Höghults grustag"
+
 
 if __name__ == "__main__":
     app.run()
