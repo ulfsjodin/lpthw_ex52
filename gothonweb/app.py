@@ -18,11 +18,10 @@ def index():
 @app.route("/game", methods=['GET', 'POST'])
 def game():
     room_name = session.get("room_name")
-    ärtan = "Vattenskidor"
     if request.method == 'GET':
         if room_name:
             room = planisphere.load_room(room_name)
-            return render_template('show_rooms.html', room=room, ärtan=ärtan)
+            return render_template('show_rooms.html', room=room)
         else:
             # Is this really neccessary?
             render_template('you_are_dead.html')
@@ -38,8 +37,8 @@ def game():
             else:
                 session['room_name'] = planisphere.name_room(next_room)
 
-        return redirect(url_for('game'))
-
+        return redirect(url_for("game"))
+        # y = next_room
 
 app.debug = True
 app.secret_key = "Höghults grustag"

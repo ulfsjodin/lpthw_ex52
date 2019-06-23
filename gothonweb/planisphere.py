@@ -98,7 +98,7 @@ def name_room(room):
     for key, value in globals().items():
         if value == room:
             # print it out to see whats happening.
-            print(key, 'room')
+            # print(key, 'room')
             return key
 
 # Just for testing.
