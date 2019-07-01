@@ -1,7 +1,7 @@
 # Pytest will be my choice for this exercise.
-
+import gothonweb
 from gothonweb import planisphere
-from gothonweb.planisphere import START, load_room, generic_death, laser_weapon_armory
+from gothonweb.planisphere import START, load_room, generic_death, laser_weapon_armory, central_corridor
 
 
 def test_Room():
@@ -35,7 +35,10 @@ def test_map():
 
 def test_gothon_game_map():
     start_room = planisphere.load_room(START)
-    assert start_room.go('dodge') ==  generic_death
+    assert start_room.go('dodge') == generic_death
 
     room = start_room.go('tell a joke')
     assert  room == laser_weapon_armory
+
+def test_load_room():
+    assert globals().get(central_corridor) == None

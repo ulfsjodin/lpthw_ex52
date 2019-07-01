@@ -102,4 +102,3 @@ def name_room(room):
             return key
 
 # Just for testing.
-# name_room(escape_pod)

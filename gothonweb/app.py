@@ -38,7 +38,7 @@ def game():
                 session['room_name'] = planisphere.name_room(next_room)
 
         return redirect(url_for("game"))
-        # y = next_room
+
 
 app.debug = True
 app.secret_key = "Höghults grustag"
